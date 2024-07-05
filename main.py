@@ -24,7 +24,7 @@ def main():
 
         # Open the URL
         driver.get(config.url)
-        time.sleep(5)  # Adjust wait time as needed
+        time.sleep(5)  
 
         # Locate and fill the first textarea
         textarea1 = WebDriverWait(driver, 20).until(
@@ -55,8 +55,6 @@ def main():
 
     except Exception as e:
         print(f"An error occurred: {e}")
-
-    # Optionally, you can keep the driver open by not calling driver.quit()
 
 if __name__ == "__main__":
     main()
