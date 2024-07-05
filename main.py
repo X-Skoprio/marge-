@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import config  # Import configuration constants and prompts from config.py
+import config 
 
 def main():
     try:
@@ -46,7 +46,7 @@ def main():
                 EC.element_to_be_clickable((By.XPATH, "/html/body/gradio-app/div/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/button"))
             )
             queue_button.click()
-            time.sleep(0.5)  # Wait 0.5 seconds before clicking again
+            time.sleep(0.5)  
 
         # Long wait time to keep the WebDriver open
         wait_time_seconds = 3600  # 1 hour
