@@ -1,3 +1,5 @@
+# main.py
+
 # import necessary modules
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -5,30 +7,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import config  # Import configuration constants and prompts from config.py
 
 def main():
-    # URL of the website
-    url = "http://127.0.0.1:7860/"
-
-    # Path to the ChromeDriver executable
-    chromedriver_path = r"C:\Users\hanay\Downloads\chromedriver-win64 (1)\chromedriver-win64\chromedriver.exe"
-    
-    # Number of times to repeat clicking the queue button
-    repeat_times = int(input("Enter the number of times to click the queue button: "))
-
-    # Default prompts and user inputs
-    prompt1 = "instagram image style, realistic, cinematic, advertisement food picture, centered, 8k uhd, high quality , background dark marble stone table, seductive, open appetit, <lora:Seductive_Dishes_Anatomy:0.8>"
-    user_input1 = input("Enter user input for first textarea: ")
-    prompt2 = "unrealistic, easynegative, duplicate bred, bad proportion, bad perspective. dish not in center, multiple dishes, deformed food, recepie, soup,"
-    user_input2 = input("Enter user input for second textarea: ")
-
-    # Set up the WebDriver with the specified service
-    service = Service(chromedriver_path)
-    driver = webdriver.Chrome(service=service)
-
     try:
+        # Number of times to repeat clicking the queue button
+        repeat_times = int(input("Enter the number of times to click the queue button: "))
+
+        # User inputs
+        user_input1 = input("Enter user input for first textarea: ")
+        user_input2 = input("Enter user input for second textarea: ")
+
+        # Set up the WebDriver with the specified service
+        service = Service(config.chromedriver_path)
+        driver = webdriver.Chrome(service=service)
+
         # Open the URL
-        driver.get(url)
+        driver.get(config.url)
         time.sleep(5)  # Adjust wait time as needed
 
         # Locate and fill the first textarea
@@ -36,14 +31,14 @@ def main():
             EC.presence_of_element_located((By.XPATH, "/html/body/gradio-app/div/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[1]/div[2]/label/textarea"))
         )
         textarea1.clear()
-        textarea1.send_keys(prompt1 + ", " + user_input1)
+        textarea1.send_keys(config.prompt1 + ", " + user_input1)
 
         # Locate and fill the second textarea
         textarea2 = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/gradio-app/div/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[1]/div[2]/div/div[2]/label/textarea"))
         )
         textarea2.clear()
-        textarea2.send_keys(prompt2 + " " + user_input2)
+        textarea2.send_keys(config.prompt2 + " " + user_input2)
 
         # Click the queue button specified number of times
         for _ in range(repeat_times):
