@@ -46,6 +46,7 @@ def main():
                 EC.element_to_be_clickable((By.XPATH, "/html/body/gradio-app/div/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/button"))
             )
             queue_button.click()
+            print(f"Clicked queue button {_} / {repeat_times}")
             time.sleep(0.5)  
 
         # Long wait time to keep the WebDriver open
